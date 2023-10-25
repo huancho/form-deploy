@@ -1,267 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      .imgContainer {
-        background: #f0f8ff url(/apply/landing.jpg) no-repeat center center;
-        background-size: cover;
-        padding: 2rem 4rem;
-        width: 60vw;
-        height: 100vh;
-      }
-
-      @media (max-width: 768px) {
         .imgContainer {
-          display: none;
+            background: #f0f8ff url(/apply/landing.jpg) no-repeat center center;
+            background-size: cover;
+            padding: 2rem 4rem;
+            width: 60vw;
+            height: 100vh;
         }
-        #calconicDivMaster,
-        .modalResults,
-        #modalLoader {
-          width: 100vw !important;
+
+        @media (max-width: 768px) {
+            .imgContainer{
+                display: none;
+            }
+            #calconicDivMaster, .modalResults, #modalLoader{
+                width: 100vw !important;
+            }
         }
-      }
 
-      #calconicDivMaster {
-        width: 40vw;
-      }
+        #calconicDivMaster{
+            width: 40vw;
+        }
 
-      html,
-      body {
-        margin: 0;
-        height: 100%;
-        overflow: hidden !important;
-      }
-      .modalResults {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 40vw;
-        background-color: #fff;
-        z-index: 1001;
-        display: none;
-        overflow: scroll;
-      }
+        html, body {
+            margin: 0; 
+            height: 100%; 
+            overflow: hidden !important
+        }
+        .modalResults{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 40vw;
+            background-color: #fff;
+            z-index: 1001;
+            display: none;
+            overflow: scroll;
+        }
 
-      #modalLoader {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 40vw;
-        background-color: #fff;
-        z-index: 1002;
-        opacity: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        display: none;
-      }
-      * {
-        transition: 500ms ease-in-out;
-      }
+        #modalLoader{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 40vw;
+            background-color: #fff;
+            z-index: 1002;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+        *{
+            transition: 500ms ease-in-out;
+        }
 
-      #creditProgram {
-        display: none;
-      }
+        #creditProgram{
+            display: none;
+        }
 
-      .linkButton {
-        border: none;
-        background-color: #fff;
-        color: dodgerblue;
-        height: 20px;
-        font-size: 15px;
-        cursor: pointer;
-      }
+        .linkButton {
+            border: none;
+            background-color: #fff;
+            color: dodgerblue;
+            height: 20px;
+            font-size: 15px;
+            cursor: pointer;
+        }
     </style>
-  </head>
-  <body id="body">
+</head>
+<body id="body">
     <div id="modalLoader">
-      <span class="font-medium text-xl text-zinc-800">
-        Getting results...
-      </span>
-      <svg
-        class="animate-spin ml-2 mr-3 h-5 w-5 text-black"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          stroke-width="4"
-        ></circle>
-        <path
-          class="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
+        <span class="font-medium  text-xl text-zinc-800	">
+            Getting results...
+        </span>
+        <svg class="animate-spin ml-2 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
     </div>
     <div id="modalResultsError" class="p-16 font-sans modalResults">
-      <span class="font-medium text-xl text-zinc-800"> Bad news! </span>
+        <span class="font-medium  text-xl text-zinc-800	">
+            Bad news!
+        </span>
+        <br></br>
+        <span class="font-medium  text-xl text-zinc-800	">
+            You do not qualify for any loan.
+        </span>
+        <br></br>
+        <button class="linkButton" onclick="returnToHome()"> Back to home</button>
 
-      <span class="font-medium text-xl text-zinc-800">
-        You do not qualify for any loan.
-      </span>
-
-      <button class="linkButton" onclick="returnToHome()">
-         Back to home
-      </button>
     </div>
-    <div
-      id="modalResultsSuccess"
-      class="px-16 py-8 md:py-16 font-sans modalResults"
-    >
-      <span class="font-medium text-xl text-zinc-800"> Great news Test! </span>
+    <div id="modalResultsSuccess" class="px-16 py-8 md:py-16 font-sans modalResults">
+        <span class="font-medium  text-xl text-zinc-800	">
+            Great news Test!
+        </span>
 
-      <span id="loanResult" class="font-medium text-xl text-zinc-800">
-        You Qualify for a $35k - $85k Loan over a 7 to 11 Month Term.
-      </span>
+        <br></br>
 
-      <span id="creditProgram" class="font-normal text-base text-zinc-800">
-        You also qualify for our 18-month revolving line of credit program. It's
-        resrved exclusively for people with 650+ credit score like yourself.
-      </span>
+        <span id="loanResult" class="font-medium  text-xl text-zinc-800	">
+            You Qualify for a $35k - $85k Loan over a 7 to 11 Month Term.
+        </span>
 
-      <span class="font-normal text-base text-zinc-800">
-        Your deicated clarify advisor will be calling you shortly to discuss
-        next steps an guide you through the process. Please have three months of
-        bank statements handy for verificatio.
+        <br></br>
 
-        <b class="text-zinc-800">Note: </b>Our fraud prevention team validates
-        the authenticity and accuracy of statements.
-      </span>
+        <span id="creditProgram" class="font-normal  text-base text-zinc-800	">
+            You also qualify for our 18-month revolving line of credit program. It's resrved exclusively for people with 650+ credit score like yourself.
+        </span>
 
-      <button class="linkButton" onclick="returnToHome()">
-         Back to home
-      </button>
+        <br></br>
+
+        <span class="font-normal  text-base text-zinc-800	">
+            Your deicated clarify advisor will be calling you shortly to discuss next steps an guide you through the process.
+            <br></br>
+            Please have three months of bank statements handy for verificatio.
+            <br></br>
+            <b class="text-zinc-800">Note: </b>Our fraud prevention team validates the authenticity and accuracy of statements.
+        </span>
+
+        <br></br>
+
+        <button class="linkButton" onclick="returnToHome()"> Back to home</button>
     </div>
-    <div style="display: flex">
-      <div class="imgContainer"></div>
-      <div
-        id="calconicDivMaster"
-        class="calconic-calculator"
-        data-calculatorid="649313c8fda771001e44bd96"
-      ></div>
+    <div style="display: flex;">
+        <div class="imgContainer"></div>
+        <div id="calconicDivMaster" class="calconic-calculator"  data-calculatorid="649313c8fda771001e44bd96"></div>
     </div>
 
     <script>
-      (function () {
-        var qs,
-          j,
-          q,
-          s,
-          d = document,
-          gi = d.getElementById,
-          ce = d.createElement,
-          gt = d.getElementsByTagName,
-          id = 'calconic_',
-          b = 'https://cdn.calconic.com/static/js/';
-        if (!gi.call(d, id)) {
-          j = ce.call(d, 'script');
-          j.id = id;
-          j.type = 'text/javascript';
-          j.async = true;
-          j.dataset.calconic = true;
-          j.src = b + 'calconic.min.js';
-          q = gt.call(d, 'script')[0];
-          q.parentNode.insertBefore(j, q);
-        }
-      })();
+        (function() { var qs,j,q,s,d=document, gi=d.getElementById,
+        ce=d.createElement, gt=d.getElementsByTagName,
+        id="calconic_", b="https://cdn.calconic.com/static/js/";
+        if(!gi.call(d,id)) { j=ce.call(d,"script"); j.id=id; j.type="text/javascript"; j.async=true;
+        j.dataset.calconic=true;
+        j.src=b+"calconic.min.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(j,q) }
+        })();
     </script>
     <script>
-      function returnToHome() {
-        hideElement('modalResultsSuccess');
-        hideElement('modalResultsError');
-        hideElement('modalLoader');
-      }
 
-      function findInputValue(ref) {
-        var element = document.getElementById(ref);
-        var value = element.querySelectorAll(
-          '.rc-select-selection-selected-value'
-        )[0].title;
-        return value;
-      }
-      var targetNode = document.getElementById('calconicDivMaster');
-      let setted = false;
-      // Create an observer instance linked to the callback function
-      var observer = new MutationObserver(function (mutationsList, observer) {
-        document.getElementById('body').style.overflow = 'hidden';
-        for (var mutation of mutationsList) {
-          if (mutation.type === 'childList') {
-            if (!setted) {
-              setted = true;
-              setTimeout(() => {
-                const form = document.querySelector('form');
+        function returnToHome(){
+            hideElement("modalResultsSuccess");
+            hideElement("modalResultsError");
+            hideElement("modalLoader");
+        }
 
-                form.addEventListener('submit', () => {
-                  const inputs =
-                    document.querySelectorAll('input[type="text"]');
-                  const array = Array.from(inputs);
+        function findInputValue(ref) {
+            var element = document.getElementById(ref);
+            var value = element.querySelectorAll('.rc-select-selection-selected-value')[0].title;
+            return value;
+        }
+        var targetNode = document.getElementById('calconicDivMaster');
+        let setted = false;
+        // Create an observer instance linked to the callback function
+        var observer = new MutationObserver(function(mutationsList, observer) {
+            document.getElementById('body').style.overflow = "hidden"
+            for(var mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    if(!setted){
+                        setted = true;
+                        setTimeout(() => {
+                            const form = document.querySelector('form');
+                            
+                            form.addEventListener('submit',() => {
+                                const inputs = document.querySelectorAll('input[type="text"]');
+                                const array = Array.from(inputs);
 
-                  for (let i = 0; i < array.length; i++) {
-                    if (array[i].value == '' || array[i].value == null) {
-                      return;
+                                for(let i = 0; i < array.length; i++) {
+                                    if(array[i].value == '' || array[i].value == null){
+                                        return
+                                    }
+                                }
+                                
+                                setTimeout(async() => {
+                                    showElement('modalLoader', 'flex')
+                                    var bussinessTime = findInputValue('ref-r1');
+                                    var revenue = findInputValue('ref-r2');
+                                    var creditScore = findInputValue('ref-r4');
+                                    let response = await fetch(`https://script.google.com/macros/s/AKfycbzzsMYU2KkWehiUgh_IkjqsRL-gEYfAwWvrsF_nyuLisbyIwtOuKSPbtaTUG9IVwNDP/exec?bussinessTime=${bussinessTime}&revenue=${revenue}&creditScore=${creditScore}`)
+                                    const data = await response.json();
+                                    document.querySelector(".calconic-form-visibility").classList.remove("calconic-order-form-visible")
+                                    form.reset()
+                                    if(data == "loan_not_found"){
+                                        showElement('modalResultsError');
+                                    }else{
+                                        document.getElementById("loanResult").innerHTML = data.qualifiedLoanTermsOutput;
+                                        if(data.creditProgram){
+                                            document.getElementById("creditProgram").style.display = "block";
+                                        }
+                                        showElement('modalResultsSuccess');
+                                    }
+                                    hideElement('modalLoader');
+                                }, 2000)
+
+                            })
+                        }, 1500)
                     }
-                  }
-
-                  setTimeout(async () => {
-                    showElement('modalLoader', 'flex');
-                    var bussinessTime = findInputValue('ref-r1');
-                    var revenue = findInputValue('ref-r2');
-                    var creditScore = findInputValue('ref-r4');
-                    let response = await fetch(
-                      `https://script.google.com/macros/s/AKfycbzzsMYU2KkWehiUgh_IkjqsRL-gEYfAwWvrsF_nyuLisbyIwtOuKSPbtaTUG9IVwNDP/exec?bussinessTime=${bussinessTime}&revenue=${revenue}&creditScore=${creditScore}`
-                    );
-                    const data = await response.json();
-                    document
-                      .querySelector('.calconic-form-visibility')
-                      .classList.remove('calconic-order-form-visible');
-                    form.reset();
-                    if (data == 'loan_not_found') {
-                      showElement('modalResultsError');
-                    } else {
-                      document.getElementById('loanResult').innerHTML =
-                        data.qualifiedLoanTermsOutput;
-                      if (data.creditProgram) {
-                        document.getElementById('creditProgram').style.display =
-                          'block';
-                      }
-                      showElement('modalResultsSuccess');
-                    }
-                    hideElement('modalLoader');
-                  }, 2000);
-                });
-              }, 1500);
+                }
             }
-          }
+        });
+        var config = { attributes: false, childList: true, subtree: false };
+        observer.observe(targetNode, config);
+
+        function showElement(elementId, display = "block"){
+            document.getElementById(elementId).style.display = display;
+            setTimeout(() => {
+                document.getElementById(elementId).style.opacity = 1;
+            }, 100)
         }
-      });
-      var config = { attributes: false, childList: true, subtree: false };
-      observer.observe(targetNode, config);
 
-      function showElement(elementId, display = 'block') {
-        document.getElementById(elementId).style.display = display;
-        setTimeout(() => {
-          document.getElementById(elementId).style.opacity = 1;
-        }, 100);
-      }
-
-      function hideElement(elementId) {
-        document.getElementById(elementId).style.opacity = 0;
-        setTimeout(() => {
-          document.getElementById(elementId).style.display = 'none';
-        }, 500);
-      }
+        function hideElement(elementId){
+            document.getElementById(elementId).style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById(elementId).style.display = 'none';
+            }, 500)
+        }
     </script>
-  </body>
+</body>
 </html>
